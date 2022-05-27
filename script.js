@@ -13,7 +13,7 @@ function run() {
         window.location = 'help.html';
         return;
     }
-    const urlTemplate = decodeURI(s);
+    const urlTemplate = decodeURIComponent(s);
     const computedURL = urlTemplate.replace(regexp, (e) => {return eval(e)});
     console.log(computedURL);
     window.location = encodeURI(computedURL);
