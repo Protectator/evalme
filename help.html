@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Evalme is eval()ing your URL...</title>
+    <link rel="stylesheet" href="picnic.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <h1>Welcome to evalme !</h1>
 
 <b>Evalme</b> is a static page that runs <code>eval()</code> on an URL you provide.<br/>
-It allows you to program a dynamic page using JavaScript in the URL.
-Here's an example :
+It allows you to program a dynamic page using JavaScript in the URL.<br/>
+Here's an example :<br/>
 
 <a href="/?s=http://www.google.com/search?q={{Math.random()}}"><code>?s=http://www.google.com/search?q={{Math.random()}}</code></a>
 </body>
