@@ -6,13 +6,60 @@
     <link rel="stylesheet" href="picnic.css">
     <link rel="stylesheet" href="style.css">
 </head>
+<style type="text/css" media="screen">
+    #editor {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+</style>
 <body>
 <h1>Welcome to evalme !</h1>
 
+<div>
 <b>Evalme</b> is a static page that runs <code>eval()</code> on an URL you provide.<br/>
 It allows you to program a dynamic page using JavaScript in the URL.<br/>
 Here's an example :<br/>
 
 <a href="/?s=http://www.google.com/search?q={{Math.random()}}"><code>?s=http://www.google.com/search?q={{Math.random()}}</code></a>
+
+<br/>
+Edit the code you want to run here :
+</div>
+<div class="editor-container">
+<div id="editor">Math.random()</div>
+</div>
+
+And then you can use this URL :
+
+<div><a href="" id="result-href" target="_blank"><code id="result"></code></a></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.5.1/ace.js" integrity="sha512-9O919JxzcqNC4domS+0uClgYzbANw4zipjON87jCe5bqICPRKOL01mATISZwy3J1hPJRQoPISNVswI6tZ6Lb2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script>
+  var editor = ace.edit("editor");
+  editor.setOptions({ selectionStyle: 'text' });
+  editor.setTheme("ace/theme/one_dark");
+  editor.setFontSize(18);
+  editor.session.setMode("ace/mode/javascript");
+  var resultNode = document.getElementById('result');
+  var linkNode = document.getElementById('result-href');
+  var origin = window.location.origin;
+
+  function update() {
+    const value = editor.getValue();
+    var encoded = encodeURIComponent(value);
+    var finalUrl = origin + '?s={{' + encoded + '}}';
+    resultNode.innerText = finalUrl;
+    linkNode.setAttribute('href', finalUrl);
+  }
+
+  editor.session.on('change', function(...e) {
+    console.log(...e);
+    update();
+  });
+
+  update();
+</script>
 </body>
 </html>
