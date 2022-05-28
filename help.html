@@ -48,7 +48,7 @@ And then you can use this URL :
 
   function update() {
     const value = editor.getValue();
-    var encoded = encodeURIComponent(value);
+    var encoded = encodeURIComponent(value).replaceAll('%0A', '');
     var finalUrl = origin + '?s={{' + encoded + '}}';
     resultNode.innerText = finalUrl;
     linkNode.setAttribute('href', finalUrl);

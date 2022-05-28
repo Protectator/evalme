@@ -1,4 +1,4 @@
-const regexp = /\{\{(.*)\}\}/;
+const regexp = /\{\{(.*)\}\}/g;
 
 function renderError(errorHeader, errorText) {
     const errorNode = document.createElement('p');
@@ -39,7 +39,7 @@ function run() {
         throw e;
     }
     try {
-        computedURL = urlTemplate.replace(regexp, (e) => {return eval(e)});
+        computedURL = urlTemplate.replaceAll(regexp, (e) => {return eval(e)});
         console.log('Computed URL : ', computedURL);
         window.location = encodeURI(computedURL);
     } catch (e) {
